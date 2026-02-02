@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    cursor: url("https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2764.png") 16 16, auto;
+  }
+
+  button, .gift {
+    cursor: url("https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2764.png") 16 16, pointer;
+  }
+
+  .page {
+    display: none;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+  }
+
+  #question {
+    font-family: 'Pacifico', cursive;
+  }
+
+  .buttons {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border-radius: 30px;
+    border: none;
+    position: absolute;
+    transition: all 0.3s ease;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    left: 40%;
+    top: 60px;
+    z-index: 2;
+  }
+
+  #noBtn {
+    background: white;
+    color: #333;
+    left: 55%;
+    top: 60px;
+    z-index: 1;
+  }
+
+  #yayText {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+  }
+
+  .side {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 3s infinite;
+  }
+
+  .left { left: 20px; top: 40%; }
+  .right { right: 20px; top: 40%; }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .gift {
+    font-size: 5rem;
+    margin-top: 30px;
+    animation: shake 1s infinite;
+  }
+
+  @keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg) translateY(-5px); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg) translateY(-5px); }
+    100% { transform: rotate(0deg); }
+  }
+
+  #finalText {
+    margin-top: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    display: none;
+  }
+
+  #loveNote {
+    margin-top: 25px;
+    max-width: 420px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    background: rgba(255,255,255,0.85);
+    padding: 20px;
+    border-radius: 20px;
+    display: none;
+    animation: fadeIn 1.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .heart {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear forwards;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0c8a63d6a1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="page active" id="page1">
+  <h1 id="question">Ellisha, Will you be my Valentine? ❤️</h1>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+</div>
+
+<div class="page" id="page2">
+  <div class="side left">🎉💖✨</div>
+  <div class="side right">✨💘🎊</div>
+
+  <h1 id="yayText">YAY! That's my lil baby 😚</h1>
+  <div class="gift" id="gift">🎁</div>
+
+  <div id="finalText">Hii my Valentine 💖💋</div>
+
+  <div id="loveNote">
+    From the moment you smile, my world feels lighter.  
+    This little website can’t hold how much you mean to me,  
+    but I hope it makes your heart flutter… just like you do to mine 💕
+    <br><br>
+    Just a reminder that you’re my favorite person and my happiest thought ♡  
+    I promise kisses, laughs, and zero regrets ❤️‍🔥🤚🏻
+  </div>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const music = document.getElementById("bgMusic");
+  let scale = 1;
+  let musicStarted = false;
+
+  function startMusic() {
+    if (!musicStarted) {
+      music.play();
+      musicStarted = true;
+    }
+  }
+
+  noBtn.addEventListener("click", () => {
+    startMusic();
+    scale *= 1.4;
+    yesBtn.style.transform = scale(${scale});
+
+    const maxX = window.innerWidth - 140;
+    const maxY = window.innerHeight - 140;
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+  });
+
+  yesBtn.addEventListener("click", () => {
+    startMusic();
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+  });
+
+  document.getElementById("gift").addEventListener("click", () => {
+    document.getElementById("finalText").style.display = "block";
+    document.getElementById("loveNote").style.display = "block";
+
+    for (let i = 0; i < 25; i++) {
+      let pop = document.createElement("div");
+      pop.innerHTML = "🎉💖✨";
+      pop.style.position = "fixed";
+      pop.style.left = Math.random() * 100 + "vw";
+      pop.style.top = "70%";
+      pop.style.fontSize = "20px";
+      pop.style.animation = "fall 1.2s linear forwards";
+      document.body.appendChild(pop);
+      setTimeout(() => pop.remove(), 1200);
+    }
+  });
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+</script>
+
+</body>
+</html>
